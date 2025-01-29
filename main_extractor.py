@@ -32,7 +32,7 @@ def main_executor(name,dob,address, user_type, income_type, cdr_number, all_docu
                     agree_status = agreement_extract(Agreement, Business_name, name)
 
                 if COF and Agreement:
-                    if all([cof_status, agree_status]):
+                    if cof_status and agree_status:
                         income_response = True
                 if not income_response:
                     if income_type == 'accredited':
