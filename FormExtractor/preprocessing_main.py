@@ -129,8 +129,8 @@ def match_id_dob(date_line, input_date):
                 parsed_date = parser.parse(date_string)
 
                 threshold_date=parser.parse('20/11/2013')
-                if parsed_date<threshold_date:
-                    if parsed_date==input_date:
+                if parsed_date < threshold_date:
+                    if parsed_date.date()==input_date.date():
                         all_dates.append(True)
                     else:
                         all_dates.append(False)
@@ -159,7 +159,8 @@ def is_within_3_months(date_string: str) -> bool:
         threshold_date = current_date - months_delta
 
         # Check if the parsed date is within the last 43 months
-        return parsed_date >= threshold_date
+        return parsed_date.date() >= threshold_date.date()
+
     except (ValueError, OverflowError) as e:
         # Handle invalid date strings
         print(f"Error parsing date '{date_string}': {e}")
