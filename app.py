@@ -73,7 +73,7 @@ async def upload_file(
      ):
 
 
-
+    document_types= document_types.split(',')
     files_list = []
     # result = {}
 
