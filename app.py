@@ -61,7 +61,7 @@ async def upload_file(
     dob: Union[str, None] = Form(None),
     address: Union[str, None] = Form(None),
     id_proof: Optional[UploadFile] = File(None),
-    files: List[Union[UploadFile, None]] = File(None),
+    uploadfiles: List[Union[UploadFile, None]] = File(None),
     user_type: Union[str, None] = Form(None),
     income_type: Union[str, None] = Form(None),
     business_name: Optional[str] = Form(None),
@@ -78,8 +78,8 @@ async def upload_file(
     # result = {}
 
     # Process uploaded files
-    if files:
-        for file in files:
+    if uploadfiles:
+        for file in uploadfiles:
             if file.filename:
                 file_location = read_pdf(file)
                 files_list.append(file_location)
@@ -89,7 +89,7 @@ async def upload_file(
         extension=id_proof.filename.split('.')[-1]
         id_file = read_id_pdf(id_proof,extension)
         id_status=id_mapping(id_file,name,dob,extension)
-        result = {str(id_status)}
+        #result = {str(id_status)}
         os.remove(id_file)
 
     else:
@@ -112,7 +112,7 @@ async def upload_file(
 
 
     # # Call the main logic if no errors
-    if result=='Id Approved':
+    if id_status:
         try:
             result = main_executor(name,dob,address, user_type, income_type, cdr_number, files_list,document_types,business_name,cfo_location,aggrement_location)
             # result={"status": "Pass"}
@@ -134,7 +134,7 @@ async def upload_file(
     # for file in files_list:
     #     os.remove(file)
 
-    return {"response": result}
+    return result
 
 
 
