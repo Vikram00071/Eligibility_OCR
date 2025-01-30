@@ -35,12 +35,12 @@ def form_w2_data_extract(pdf_path,input_name,income_threshold):
             elif 'wages,tips,othercomp' in new_string.lower() :
                 amount_found=True
                 ammout = splited_text[idx + 1]
-                with_sign_ordinary= re.findall(r'\$([\d+,.]+)', ammout)
+                with_sign_ordinary= re.findall(r'\$([\d,]+(?:\.\d+)?)', ammout)
                 if with_sign_ordinary:
                     is_valid, value_status = is_less_than_amount(with_sign_ordinary[0], income_threshold)
 
                 if not with_sign_ordinary:
-                    without_sign = re.findall(r'([\d+,.]+)', ammout)
+                    without_sign = re.findall(r'([\d,]+(?:\.\d+)?)', ammout)
                     if without_sign:
                         is_valid, value_status = is_less_than_amount(without_sign[0],income_threshold)
                     else:
