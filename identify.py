@@ -156,6 +156,7 @@ def for_1099(name,pdf_files,threshold):
     for file in pdf_files:
         form_type=extract_pdf_text_for_1099_detection(file)
         if form_type!='':
+            print('detected',form_type)
             if form_type=='1099-B':
                 datalist = form_1099_B_extract(file, name,threshold)
                 for data in datalist:
@@ -226,6 +227,7 @@ def for_1065(name,pdf_files,income_threshold):
     final_1065k_list=[]
     for file in pdf_files:
         form_type = extract_pdf_text_for_1065_detection(file)
+        print('detected',form_type)
         if form_type=='1065':
             data_1065list = form_1065_extractor(file, name, income_threshold)
             for data in data_1065list:
@@ -321,6 +323,7 @@ def for_1040(name,pdf_files,threshold):
         form_type = extract_pdf_text_for_1040_detection(file)
 
         if form_type:
+            print('detected',form_type)
             data_1040list = form_1040_data_extract(file, name,threshold)
 
             for data in data_1040list:
@@ -336,6 +339,7 @@ def for_W2(name,pdf_files,income_threshold):
     for file in pdf_files:
         form_type = extract_pdf_text_for_w2_detection(pdf_files)
         if form_type:
+            print('detected',form_type)
             data_w2list = form_w2_data_extract(file, name, income_threshold)
             for data in data_w2list:
                 list_w2.append(data)
