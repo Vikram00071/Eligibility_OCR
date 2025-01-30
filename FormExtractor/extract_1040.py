@@ -113,7 +113,7 @@ def form_1040_data_extract(pdf_path,input_name,threshold):
 
             elif 'adjustedgrossincome' in new_string.lower():
                 amount_found=True
-                with_sign_ordinary= re.findall(r'\$(?:\s*)?([\d,]+(?:\.\d+)?)+)', i)
+                with_sign_ordinary= re.findall(r'\$([\d,]+(?:\.\d+)?)+)', i)
                 if with_sign_ordinary:
                     cleaned_income = clean_currency_string(with_sign_ordinary[0])
                     is_valid, value_status = is_less_than_amount(with_sign_ordinary[0], threshold)
