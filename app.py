@@ -66,7 +66,7 @@ async def upload_file(
     income_type: Union[str, None] = Form(None),
     business_name: Optional[str] = Form(None),
     cdr_number: Optional[int] = Form(None),
-    document_types: Union[list, None] = Form(None),
+    document_types: Union[str, None] = Form(None),
     certification: Optional[UploadFile] = File(None),
     aggrement: Optional[UploadFile] = File(None),
     pi_key: str = Security(validate_api_key),  # API key dependency
