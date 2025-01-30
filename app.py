@@ -89,6 +89,7 @@ async def upload_file(
         extension=id_proof.filename.split('.')[-1]
         id_file = read_id_pdf(id_proof,extension)
         id_status=id_mapping(id_file,name,dob,extension)
+        print(id_status,'id_status')
         #result = {str(id_status)}
         os.remove(id_file)
 
