@@ -67,6 +67,16 @@ def check_name_match(name_area, input_name):
 
     return name_match
 
+def check_name_match_again(name_area, input_name):
+    input_name_words = input_name.split()
+    name_area_lower = name_area.lower()
+    name_area_lower=name_area_lower.replace(' ','').lower()
+    if all(word.lower() in name_area_lower for word in input_name_words):
+        name_match = True
+    else:
+        name_match = False
+
+    return name_match
 
 def extract_year(splited_text,data,img_bgr_resized):
     year=''
