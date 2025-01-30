@@ -41,7 +41,7 @@ def form_1065_extractor(pdf_path,input_name,income_threshold):
                 if ordinary:
                     cleaned_ordinary_income, ordinary_status = is_less_than_amount(ordinary[0], income_threshold)
                 if not ordinary:
-                    ordinary = re.findall(r'subtract line+[.\d+A-Za-z-\s*]+(?:23)?\s+([\d+,.]+)', i.lower())
+                    ordinary = re.findall(r'subtract line+[.\d+A-Za-z-\s*]+(?:23)?\s+([\d,]+(?:\.\d+)?)', i.lower())
                     if ordinary:
                         cleaned_ordinary_income, net_earning_status = is_less_than_amount(ordinary[0], income_threshold)
 
@@ -51,7 +51,7 @@ def form_1065_extractor(pdf_path,input_name,income_threshold):
                 if net_earning:
                     cleanednet_earning_income, net_earning_status = is_less_than_amount(net_earning[0], income_threshold)
                 if not net_earning:
-                    net_earning = re.findall(r'self-employment+[.\d+A-Za-z-\s*]+(?:14)?\s+([\d+,.]+)', i.lower())
+                    net_earning = re.findall(r'self-employment+[.\d+A-Za-z-\s*]+(?:14)?\s+([\d,]+(?:\.\d+)?)', i.lower())
                     if net_earning:
                         cleanednet_earning_income, net_earning_status = is_less_than_amount(net_earning[0], income_threshold)
 
@@ -61,7 +61,7 @@ def form_1065_extractor(pdf_path,input_name,income_threshold):
                 if total_asset:
                     cleaned_assest_income, total_asset_status = is_less_than_amount(total_asset[0], 5000000.0)
                 if not total_asset:
-                    total_asset = re.findall(r'total assets|totalassets+[.\d+A-Za-z-\s*]+\s+([\d+,.]+)', i.lower())
+                    total_asset = re.findall(r'total assets|totalassets+[.\d+A-Za-z-\s*]+\s+([\d,]+(?:\.\d+)?)', i.lower())
                     if total_asset:
                         cleaned_assest_income, total_asset_status = is_less_than_amount(total_asset[0], 5000000.0)
 
@@ -71,7 +71,7 @@ def form_1065_extractor(pdf_path,input_name,income_threshold):
                 if net_income:
                     cleaned_net_income, net_income_status = is_less_than_amount(net_income[0], income_threshold)
                 if not net_income:
-                    net_income = re.findall(r'net income+[.\d+A-Za-z-()\s*]+\s+([\d+,.]+)', i.lower())
+                    net_income = re.findall(r'net income+[.\d+A-Za-z-()\s*]+\s+([\d,]+(?:\.\d+)?)', i.lower())
                     if net_income:
                         cleaned_net_income, net_income_status = is_less_than_amount(net_income[0], income_threshold)
 
@@ -81,7 +81,7 @@ def form_1065_extractor(pdf_path,input_name,income_threshold):
                 if end_year_balance:
                     end_year_income, end_year_status = is_less_than_amount(end_year_balance[0], 5000000.0)
                 if not end_year_balance:
-                    end_year_balance = re.findall(r'end\s*of\s*year[.\dA-Za-z-()\s*]+\s+([\d+,.]+)', i.strip().lower())
+                    end_year_balance = re.findall(r'end\s*of\s*year[.\dA-Za-z-()\s*]+\s+([\d,]+(?:\.\d+)?)', i.strip().lower())
                     if end_year_balance:
                         end_year_income, end_year_status = is_less_than_amount(end_year_balance[0], 5000000.0)
 
